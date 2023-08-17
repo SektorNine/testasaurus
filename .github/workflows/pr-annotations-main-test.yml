@@ -9,6 +9,8 @@ on:
 jobs:
   compliance_with_annotations:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
     steps:
       - name: Repository Checkout
         uses: actions/checkout@v3
