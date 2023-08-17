@@ -1,0 +1,10 @@
+name: Tee Exists Test
+on:
+  workflow_dispatch
+
+jobs:
+  check_tee_exists:
+    runs-on: ubuntu-latest
+    steps:
+      - name: beep
+        run: echo "$(which tee)"
