@@ -31,7 +31,7 @@ jobs:
               paths  = [ "./tf/*.tf" ]
             }
       - name: Steampipe Checks
-        uses: turbot/steampipe-action-check@78301f9fccddfbf5c55d1c00c26f9c930c769392
+        uses: turbot/steampipe-action-check@69898a40f1da2182a89ee79565f92d391464a6a5
         with:
           mod-url: https://github.com/turbot/steampipe-mod-terraform-aws-compliance
           mod-branch: ${{ inputs.mod_branch }}
