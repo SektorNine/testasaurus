@@ -23,6 +23,7 @@ jobs:
               manifest_file_paths  = [
                 "github.com/ksoclabs/kube-goat//manifests//**.*.yaml"
               ]
+              source_type = "manifest"
             }
       - name: Steampipe Checks
         uses: turbot/steampipe-action-check@7d845af8fd682cf74536df27971248c60661354a
