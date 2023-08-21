@@ -40,3 +40,4 @@ jobs:
           mod-branch: ${{ inputs.mod_branch }}
           snapshot-type: ${{ inputs.snapshot }}
           pipes-token: ${{ secrets.PIPES_TOKEN }}
+          checks: ${{ inputs.checks }}
