@@ -26,8 +26,9 @@ jobs:
               source_type = "manifest"
             }
       - name: Steampipe Checks
-        uses: turbot/steampipe-action-check@7d845af8fd682cf74536df27971248c60661354a
+        uses: turbot/steampipe-action-check@grz-test
         with:
           mod-url: https://github.com/turbot/steampipe-mod-kubernetes-compliance
           pipes-token: ${{ secrets.PIPES_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          create-annotations: ${{ inputs.annotate }}

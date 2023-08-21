@@ -24,7 +24,7 @@ jobs:
               paths  = [ "./tf/*.tf" ]
             }
       - name: Steampipe Checks with Annotations
-        uses: turbot/steampipe-action-check@7d845af8fd682cf74536df27971248c60661354a
+        uses: turbot/steampipe-action-check@grz-test
         with:
           mod-url: https://github.com/turbot/steampipe-mod-terraform-aws-compliance
           create-annotations: true

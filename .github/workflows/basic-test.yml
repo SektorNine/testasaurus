@@ -18,6 +18,11 @@ on:
         description: checks to run
         required: false
         default: 'all'
+      annotate:
+        description: annotate
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   aws_tf_compliance:
@@ -34,10 +39,11 @@ jobs:
               paths  = [ "./tf/*.tf" ]
             }
       - name: Steampipe Checks
-        uses: turbot/steampipe-action-check@7d845af8fd682cf74536df27971248c60661354a
+        uses: turbot/steampipe-action-check@grz-test
         with:
           mod-url: https://github.com/turbot/steampipe-mod-terraform-aws-compliance
           mod-branch: ${{ inputs.mod_branch }}
           snapshot-type: ${{ inputs.snapshot }}
           pipes-token: ${{ secrets.PIPES_TOKEN }}
           checks: ${{ inputs.checks }}
+          create-annotations: ${{ inputs.annotate }}
