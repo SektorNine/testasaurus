@@ -17,7 +17,7 @@ jobs:
               paths  = [ "./cf/*" ]
             }
       - name: Steampipe Checks
-        uses: turbot/steampipe-action-check@71692c3597799de249210fc8d01317c21945cd58
+        uses: turbot/steampipe-action-check@7d845af8fd682cf74536df27971248c60661354a
         with:
           mod-url: https://github.com/turbot/steampipe-mod-awscfn-compliance
           mod-branch: initial-commit
