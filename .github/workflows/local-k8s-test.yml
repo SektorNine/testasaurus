@@ -1,0 +1,33 @@
+name: Kubernetes Compliance Test
+on:
+  workflow_dispatch:
+    inputs:
+      annotate:
+        description: create annotations
+        required: true
+        default: false
+        type: boolean
+
+jobs:
+  k8s_compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Checkout
+        uses: actions/checkout@v3
+      - name: Steampipe Setup
+        uses: turbot/steampipe-action-setup@v1.4.0
+        with:
+          plugin-connections: |
+            connection "k8s" {
+              plugin = "kubernetes"
+              manifest_file_paths  = [
+                "./k8s/*.yaml"
+              ]
+              source_type = "manifest"
+            }
+      - name: Steampipe Checks
+        uses: turbot/steampipe-action-check@7d845af8fd682cf74536df27971248c60661354a
+        with:
+          mod-url: https://github.com/turbot/steampipe-mod-kubernetes-compliance
+          pipes-token: ${{ secrets.PIPES_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
