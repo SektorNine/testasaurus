@@ -23,9 +23,44 @@ jobs:
               plugin = "terraform"
               paths  = [ "./tf/*.tf" ]
             }
-      - name: Steampipe Checks with Annotations
+
+            connection "k8s" {
+              plugin = "kubernetes"
+              manifest_file_paths  = [
+                "./k8s/*.yaml"
+              ]
+              source_type = "manifest"
+            }
+
+            connection "awscfn" {
+              plugin = "awscfn"
+              paths  = [ "./cf/*" ]
+            }
+      - name: Steampipe Check - Terraform AWS
         uses: turbot/steampipe-action-check@grz-test
         with:
           mod-url: https://github.com/turbot/steampipe-mod-terraform-aws-compliance
           create-annotations: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          additional-args: "--search-path=tf"
+          snapshot-type: "public"
+          pipes-token: ${{ secrets.PIPES_TOKEN }}
+      - name: Steampipe Check - CloudFormation AWS
+        uses: turbot/steampipe-action-check@grz-test
+        with:
+          mod-url: https://github.com/turbot/steampipe-mod-awscfn-compliance
+          mod-branch: initial-commit
+          additional-args: "--search-path=awscfn"
+          create-annotations: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          snapshot-type: "public"
+          pipes-token: ${{ secrets.PIPES_TOKEN }}
+      - name: Steampipe Checks
+        uses: turbot/steampipe-action-check@grz-test
+        with:
+          mod-url: https://github.com/turbot/steampipe-mod-kubernetes-compliance
+          additional-args: "--search-path=k8s"
+          snapshot-type: "public"
+          pipes-token: ${{ secrets.PIPES_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          create-annotations: true
