@@ -5,6 +5,8 @@ on:
       - opened
     branches:
       - 'main'
+    paths:
+      - tf/*
 
 jobs:
   compliance_with_annotations:
