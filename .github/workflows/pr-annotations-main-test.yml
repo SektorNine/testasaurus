@@ -55,7 +55,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           snapshot-type: "public"
           pipes-token: ${{ secrets.PIPES_TOKEN }}
-      - name: Steampipe Checks
+      - name: Steampipe Checks K8s
         uses: turbot/steampipe-action-check@grz-test
         with:
           mod-url: https://github.com/turbot/steampipe-mod-kubernetes-compliance

@@ -1,0 +1,32 @@
+name: K8s Annotations Test
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - 'main'
+
+jobs:
+  compliance_with_annotations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Checkout
+        uses: actions/checkout@v3
+      - name: Steampipe Setup
+        uses: turbot/steampipe-action-setup@v1.4.0
+        with:
+          plugin-connections: |
+            connection "k8s" {
+              plugin = "kubernetes"
+              manifest_file_paths  = [
+                "./k8s/*.yaml"
+              ]
+              source_type = "manifest"
+            }
+      - name: Steampipe Checks K8s
+        uses: turbot/steampipe-action-check@grz-test
+        env:
+          SP_VAR_common_dimensions: '["connection_name", "context_name", "namespace", "path", "source_type"]'
+        with:
+          mod-url: https://github.com/turbot/steampipe-mod-kubernetes-compliance
+          create-annotations: true
