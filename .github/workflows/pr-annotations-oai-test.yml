@@ -1,0 +1,32 @@
+name: OpenAPI Testing
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - 'main'
+    paths:
+      - openapi/*
+
+jobs:
+  compliance_with_annotations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Checkout
+        uses: actions/checkout@v3
+      - name: Steampipe Setup
+        uses: turbot/steampipe-action-setup@v1.4.0
+        with:
+          plugin-connections: |
+            connection "oai" {
+              plugin = "openapi"
+              paths  = [ "./openapi/*" ]
+            }
+      - name: Steampipe Check - OpenAPI Insights Controls
+        uses: turbot/steampipe-action-check@grz-test
+        with:
+          mod-url: https://github.com/turbot/steampipe-mod-openapi-insights
+          mod-branch: initial-controls
+          create-annotations: true
+          snapshot-type: "public"
+          pipes-token: ${{ secrets.PIPES_TOKEN }}
