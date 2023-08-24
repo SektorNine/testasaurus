@@ -1,7 +1,10 @@
 name: Well-Architected
 on:
   workflow_dispatch:
-
+    inputs:
+      snapshot:
+        description: leave empty or 'anyone_with_link' / 'workspace'
+        required: false
 jobs:
   aws_waf:
     runs-on: ubuntu-latest
@@ -23,6 +26,8 @@ jobs:
         uses: turbot/steampipe-action-check@update-check-action
         with:
           mod-url: https://github.com/turbot/steampipe-mod-aws-well-architected
+          snapshot-visibility: ${{ inputs.snapshot }}
+          pipes-token: ${{ secrets.PIPES_TOKEN }}
           checks: |
             benchmark.well_architected_framework_reliability
             benchmark.well_architected_framework_security
