@@ -29,7 +29,6 @@ jobs:
         uses: turbot/steampipe-action-check@grz-test
         with:
           mod-url: https://github.com/turbot/steampipe-mod-terraform-aws-compliance
-          create-annotations: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          snapshot-type: "public"
+          snapshot-visibility: anyone_with_link
           pipes-token: ${{ secrets.PIPES_TOKEN }}

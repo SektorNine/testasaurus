@@ -1,12 +1,6 @@
 name: Local Kubernetes Compliance Test
 on:
   workflow_dispatch:
-    inputs:
-      annotate:
-        description: create annotations
-        required: true
-        default: false
-        type: boolean
 
 jobs:
   k8s_compliance:
@@ -31,4 +25,3 @@ jobs:
           mod-url: https://github.com/turbot/steampipe-mod-kubernetes-compliance
           pipes-token: ${{ secrets.PIPES_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          create-annotations: ${{ inputs.annotate }}

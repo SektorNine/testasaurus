@@ -31,4 +31,3 @@ jobs:
           SP_VAR_common_dimensions: '["connection_name", "context_name", "namespace", "path", "source_type"]'
         with:
           mod-url: https://github.com/turbot/steampipe-mod-kubernetes-compliance
-          create-annotations: true

@@ -1,12 +1,6 @@
 name: Kubernetes Compliance Test
 on:
   workflow_dispatch:
-    inputs:
-      annotate:
-        description: create annotations
-        required: true
-        default: false
-        type: boolean
 
 jobs:
   k8s_compliance:
@@ -21,7 +15,7 @@ jobs:
             connection "k8s" {
               plugin = "kubernetes"
               manifest_file_paths  = [
-                "github.com/ksoclabs/kube-goat//manifests//**.*.yaml"
+                "github.com/ksoclabs/kube-goat//manifests//**/*.yaml"
               ]
               source_type = "manifest"
             }

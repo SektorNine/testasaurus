@@ -27,6 +27,5 @@ jobs:
         with:
           mod-url: https://github.com/turbot/steampipe-mod-openapi-insights
           mod-branch: initial-controls
-          create-annotations: true
-          snapshot-type: "public"
+          snapshot-visibility: anyone_with_link
           pipes-token: ${{ secrets.PIPES_TOKEN }}

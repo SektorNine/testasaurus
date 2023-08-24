@@ -7,22 +7,18 @@ on:
         required: true
         default: main
       snapshot:
-        description: Upload a snapshot to Turbot Pipes, if set to a value other than 'none', secrets.PIPES_TOKEN must be configured on the repository.
+        description: leave empty or 'anyone_with_link' / 'workspace'
         required: false
-        default: 'public'
-        type: choice
-        options:
-          - public
-          - private
       checks:
         description: checks to run
         required: false
         default: 'all'
-      annotate:
-        description: annotate
+      artifacts:
+        description: comma-sep types of exports
         required: false
-        default: false
-        type: boolean
+      additional:
+        description: additional cli args/flags
+        required: false
 
 jobs:
   aws_tf_compliance:
@@ -43,7 +39,7 @@ jobs:
         with:
           mod-url: https://github.com/turbot/steampipe-mod-terraform-aws-compliance
           mod-branch: ${{ inputs.mod_branch }}
-          snapshot-type: ${{ inputs.snapshot }}
+          snapshot-visibility: ${{ inputs.snapshot }}
           pipes-token: ${{ secrets.PIPES_TOKEN }}
           checks: ${{ inputs.checks }}
-          create-annotations: ${{ inputs.annotate }}
+          artifact-exports: ${{ inputs.artifacts }}
