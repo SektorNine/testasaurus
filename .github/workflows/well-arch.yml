@@ -29,5 +29,5 @@ jobs:
           snapshot-visibility: ${{ inputs.snapshot }}
           pipes-token: ${{ secrets.PIPES_TOKEN }}
           checks: |
-            benchmark.well_architected_framework_reliability
-            benchmark.well_architected_framework_security
+            aws_well_architected.benchmark.well_architected_framework_reliability
+            aws_compliance.benchmark.cis_v200_2_2
