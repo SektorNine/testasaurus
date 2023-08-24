@@ -7,7 +7,7 @@ spec:
   containers:
   - name: main
     image: alpine
-    command: ["/bin/sleep", "999999"]
+    command: ["/bin/sleep", "9999999"]
 ---
 # runAsNonRoot set at pod, but overridden at container
 apiVersion: v1
@@ -20,7 +20,7 @@ spec:
   containers:
   - name: main
     image: alpine
-    command: ["/bin/sleep", "999999"]
+    command: ["/bin/sleep", "9999999"]
     securityContext:
       runAsNonRoot: false
 ---
