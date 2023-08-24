@@ -20,7 +20,6 @@ on:
       additional:
         description: additional cli args/flags
         required: false
-        default: --output=none
 
 jobs:
   aws_tf_compliance:
