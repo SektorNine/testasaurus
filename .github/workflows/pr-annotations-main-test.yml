@@ -26,7 +26,7 @@ jobs:
               paths  = [ "./tf/*.tf" ]
             }
       - name: Steampipe Check - Terraform AWS
-        uses: turbot/steampipe-action-check@grz-test
+        uses: turbot/steampipe-action-check@update-check-action
         with:
           mod-url: https://github.com/turbot/steampipe-mod-terraform-aws-compliance
           github-token: ${{ secrets.GITHUB_TOKEN }}

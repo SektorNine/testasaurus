@@ -23,7 +23,7 @@ jobs:
               paths  = [ "./openapi/*" ]
             }
       - name: Steampipe Check - OpenAPI Insights Controls
-        uses: turbot/steampipe-action-check@grz-test
+        uses: turbot/steampipe-action-check@update-check-action
         with:
           mod-url: https://github.com/turbot/steampipe-mod-openapi-insights
           mod-branch: initial-controls

@@ -26,7 +26,7 @@ jobs:
               source_type = "manifest"
             }
       - name: Steampipe Checks K8s
-        uses: turbot/steampipe-action-check@grz-test
+        uses: turbot/steampipe-action-check@update-check-action
         env:
           SP_VAR_common_dimensions: '["connection_name", "context_name", "namespace", "path", "source_type"]'
         with:
