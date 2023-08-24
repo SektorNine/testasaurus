@@ -31,3 +31,5 @@ jobs:
           SP_VAR_common_dimensions: '["connection_name", "context_name", "namespace", "path", "source_type"]'
         with:
           mod-url: https://github.com/turbot/steampipe-mod-kubernetes-compliance
+          snapshot-visibility: anyone_with_link
+          pipes-token: ${{ secrets.PIPES_TOKEN }}
