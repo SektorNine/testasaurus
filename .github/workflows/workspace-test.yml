@@ -10,6 +10,11 @@ jobs:
         uses: actions/checkout@v3
       - name: Steampipe Setup
         uses: turbot/steampipe-action-setup@v1.4.0
+        with:
+          plugin-connections: |
+            connection "aws" {
+              plugin = "aws"
+            }
       - name: Steampipe Checks
         uses: turbot/steampipe-action-check@update-check-action
         with:
