@@ -1,0 +1,25 @@
+name: Test Workspace
+on:
+  workflow_dispatch:
+
+jobs:
+  meh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Checkout
+        uses: actions/checkout@v3
+      - name: Steampipe Setup
+        uses: turbot/steampipe-action-setup@v1.4.0
+        with:
+          plugin-connections: |
+            connection "aws" {
+              plugin = "aws"
+            }
+      - name: Steampipe Checks
+        uses: turbot/steampipe-action-check@update-check-action
+        with:
+          mod-url: https://github.com/turbot/steampipe-mod-aws-compliance
+          checks: benchmark.cis_v150
+          pipes-token: ${{ secrets.PIPES_TOKEN }}
+          snapshot-visibility: workspace
+          additional-args: '--workspace="graza/default"'

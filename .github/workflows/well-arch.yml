@@ -1,0 +1,33 @@
+name: Well-Architected
+on:
+  workflow_dispatch:
+    inputs:
+      snapshot:
+        description: leave empty or 'anyone_with_link' / 'workspace'
+        required: false
+jobs:
+  aws_waf:
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+    steps:
+      - name: Repository Checkout
+        uses: actions/checkout@v3
+      - name: Steampipe Setup
+        uses: turbot/steampipe-action-setup@v1.4.0
+        with: 
+          plugin-connections: |
+            connection "aws" {
+              plugin = "aws"
+              regions = ["eu-*", "us-*"]
+            }
+      - name: Steampipe Checks
+        uses: turbot/steampipe-action-check@update-check-action
+        with:
+          mod-url: https://github.com/turbot/steampipe-mod-aws-well-architected
+          snapshot-visibility: ${{ inputs.snapshot }}
+          pipes-token: ${{ secrets.PIPES_TOKEN }}
+          checks: |
+            benchmark.well_architected_framework_reliability
+            aws_compliance.benchmark.cis_v200_2_2
