@@ -9,7 +9,7 @@ jobs:
       - name: Repository Checkout
         uses: actions/checkout@v3
       - name: Steampipe Setup
-        uses: turbot/steampipe-action-setup@v1.4.0
+        uses: turbot/steampipe-action-setup@v1.5.0
         with:
           plugin-connections: |
             connection "k8s" {
