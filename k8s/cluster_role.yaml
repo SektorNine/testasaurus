@@ -28,7 +28,7 @@ rules:
   resources: ["deployments"] # KubernetesPipelineTest#cascadingDelete
   verbs: ["create","delete","get","list","patch","update","watch"]
 - apiGroups: ["extensions"]
-  resources: ["deployments"] 
+  resources: ["deployments"] # ditto
   verbs: ["create","delete","get","list","patch","update","watch"]
 - apiGroups: ["apps"]
   resources: ["replicasets"] # ditto
