@@ -20,3 +20,5 @@ jobs:
         uses: turbot/steampipe-action-check@update-check-action
         with:
           mod-url: https://github.com/turbot/steampipe-mod-terraform-aws-compliance
+          snapshot-visibility: anyone_with_link
+          pipes-token: ${{ secrets.PIPES_TOKEN }}
