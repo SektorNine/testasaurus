@@ -1,0 +1,14 @@
+name: CLI install
+on:
+  workflow_dispatch
+
+jobs:
+  only_cli:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install steampipe
+        run: sudo /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/turbot/steampipe/main/install.sh)"
+      - name: Install plugin
+        run: steampipe install hackernews
+      - name: Query
+        steampipe query "select * from hackernews_new"
