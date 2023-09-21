@@ -1,0 +1,20 @@
+name: Basic setup
+on:
+  workflow_dispatch
+
+jobs:
+  only_setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Checkout
+        uses: actions/checkout@v3
+      - name: Steampipe Setup
+        uses: turbot/steampipe-action-setup@v1.5.0
+        with:
+          plugin-connections: |
+            connection "tf" {
+              plugin = "terraform"
+              paths  = [ "./tf/*.tf" ]
+            }
+      - name: Steampipe Query
+        run: steampipe query "select * from terraform_resource"
