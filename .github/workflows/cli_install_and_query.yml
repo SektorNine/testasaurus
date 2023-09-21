@@ -11,4 +11,4 @@ jobs:
       - name: Install plugin
         run: steampipe install hackernews
       - name: Query
-        steampipe query "select * from hackernews_new"
+        run: steampipe query "select * from hackernews_new"
