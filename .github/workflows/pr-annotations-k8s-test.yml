@@ -27,9 +27,8 @@ jobs:
             }
       - name: Steampipe Checks K8s
         uses: turbot/steampipe-action-check@update-check-action
-        env:
-          SP_VAR_common_dimensions: '["connection_name", "context_name", "namespace", "path", "source_type"]'
         with:
           mod-url: https://github.com/turbot/steampipe-mod-kubernetes-compliance
           snapshot-visibility: anyone_with_link
+          additional-args: "--var 'common_dimensions'='[\"path\"]'"
           pipes-token: ${{ secrets.PIPES_TOKEN }}
