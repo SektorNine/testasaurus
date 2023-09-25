@@ -1,1 +1,34 @@
+name: Install and configure Steampipe and the Terraform plugin, then install/configure/run steampipe-mod-terraform-compliance
+on:
+  pull_request:
+    types:
+      - opened
+    branches:
+      - 'main'
+    paths:
+      - ./*
 
+jobs:
+  compliance_with_annotations:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      checks: write
+    steps:
+      - name: Repository Checkout
+        uses: actions/checkout@v3
+      - name: Steampipe Setup
+        uses: turbot/steampipe-action-setup@v1
+        with:
+          plugin-connections: |
+            connection "tf" {
+              plugin = "terraform"
+              paths  = [ "./*.tf" ]
+            }
+      - name: Steampipe Check - Terraform AWS
+        uses: turbot/steampipe-action-check@v1
+        with:
+          mod-url: https://github.com/turbot/steampipe-mod-terraform-aws-compliance
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          snapshot-visibility: anyone_with_link
+          pipes-token: ${{ secrets.PIPES_TOKEN }}
