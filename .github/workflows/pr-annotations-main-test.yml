@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
+      checks: write
     steps:
       - name: Repository Checkout
         uses: actions/checkout@v3
