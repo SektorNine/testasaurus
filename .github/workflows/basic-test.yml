@@ -16,7 +16,6 @@ on:
       artifacts:
         description: comma-sep types of exports
         required: false
-        default: csv
       additional:
         description: additional cli args/flags
         required: false
