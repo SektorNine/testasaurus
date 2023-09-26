@@ -1,0 +1,36 @@
+name: AWS Personal SandBox
+on:
+  workflow_dispatch:
+
+jobs:
+  aws_checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Checkout
+        uses: actions/checkout@v3
+      - name: Setup AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{secrets.AWS_ACCOUNT_ID}}:oidc-provider/token.actions.githubusercontent.com
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: eu-north-1
+      - name: Validate AWS Credentials
+        run: |
+          aws sts get-caller-identity
+      - name: Steampipe Setup
+        uses: turbot/steampipe-action-setup@v1.5.0
+        with:
+          plugin-connections: |
+            connection "aws" {
+              plugin = "aws"
+            }
+      - name: Steampipe Checks
+        uses: turbot/steampipe-action-check@update-check-action
+        with:
+          mod-url: https://github.com/turbot/steampipe-mod-aws-compliance
+          checks: |
+            control.s3_bucket_logging_enabled
+            control.s3_bucket_default_encryption_enabled
+
+      
+
