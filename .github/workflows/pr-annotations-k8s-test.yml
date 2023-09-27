@@ -15,7 +15,7 @@ jobs:
       - name: Repository Checkout
         uses: actions/checkout@v3
       - name: Steampipe Setup
-        uses: turbot/steampipe-action-setup@v1.5.0
+        uses: turbot/steampipe-action-setup@v1
         with:
           plugin-connections: |
             connection "k8s" {
@@ -26,7 +26,7 @@ jobs:
               source_type = "manifest"
             }
       - name: Steampipe Checks K8s
-        uses: turbot/steampipe-action-check@update-check-action
+        uses: turbot/steampipe-action-check@v1
         with:
           mod-url: https://github.com/turbot/steampipe-mod-kubernetes-compliance
           additional-args: "--var 'common_dimensions=[\"namespace\",\"path\",\"source_type\"]'"

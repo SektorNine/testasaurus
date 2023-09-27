@@ -9,7 +9,7 @@ jobs:
       - name: Repository Checkout
         uses: actions/checkout@v3
       - name: Steampipe Setup
-        uses: turbot/steampipe-action-setup@v1.5.0
+        uses: turbot/steampipe-action-setup@v1
         with:
           plugin-connections: |
             connection "github" {
@@ -17,7 +17,7 @@ jobs:
               token  = "${{secrets.GH_PAT}}"
             }
       - name: Steampipe Checks
-        uses: turbot/steampipe-action-check@update-check-action
+        uses: turbot/steampipe-action-check@v1
         with:
           mod-url: https://github.com/turbot/steampipe-mod-github-compliance
-          checks: benchmark.cis_supply_chain_v100
+          mod-checks: benchmark.cis_supply_chain_v100
